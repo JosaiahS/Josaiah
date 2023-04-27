@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdint.h>
+
+//*Defines 
+#define LINE_SIZE_MAX 80
+
+typedef struct validation validation;
+
+struct validation{
+    int tag;
+    int valid;
+    char data[32];  
+};
+
+//*main function
+int main(int argc, char * argv[]){
+    
+    char * filename = argv[1];
+    //*Checks if the correct amount of command line arguments have been provided
+    if(argc != 2) return 1;
+
+    //*content: Will hold the information in the filename file
+    FILE * content = fopen(filename, "r");
+    
+    //*If file is empty or failed to open
+    if(content == NULL) return 1;
+
+    //*count is used for printing the corrent amount of characters
+    int count = 0;
+    //*Used to increment through the readFile2 array that will containt contents from the input file
+    int i = 0;
+    //*Used to read the contents of the file
+    char readFile;
+    //*Used to store the contents of the file
+    char readFile2[5000];
+    //*while loop that read until the end of the file and saves each character into the readFile2 array
+    while( (readFile = fgetc(content)) != EOF){
+        readFile2[i] = readFile;
+        //*Used for printing result ONLY 
+        count++;
+        //*increment i
+        i++;
+    }
+
+    for(int i = 0; i < count; i++)
+    {
+        printf("%c", readFile2[i]);
+    }   
+
+    return 0;
+}
